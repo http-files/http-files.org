@@ -147,6 +147,7 @@ clients:
     platform: CLI (requires Neovim + curl)
     language: Lua
     repo: https://github.com/mistweaverco/kulala-cli
+    docs: https://kulala.app/usage
     description: >
       CLI companion to kulala.nvim. GitHub Action available for CI pipelines.
 
