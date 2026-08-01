@@ -124,6 +124,20 @@ clients:
       Rust-based CLI/TUI/GUI supporting both JetBrains and REST Client syntax,
       http-client.env.json, and HTML/Markdown report generation.
 
+  resterm:
+    name: Resterm
+    shortName: Resterm
+    author: unkn0wn-root
+    type: cli
+    platform: CLI, TUI
+    language: Go
+    repo: https://github.com/unkn0wn-root/resterm
+    docs: https://github.com/unkn0wn-root/resterm#readme
+    description: >
+      Terminal API client for .http and .rest files with support for HTTP,
+      GraphQL, gRPC, WebSockets, SSE, workflows, SSH tunnels, profiling,
+      OpenAPI, Kubernetes port-forwarding, and headless execution.
+
   kulala-cli:
     name: Kulala CLI
     shortName: kulala CLI
