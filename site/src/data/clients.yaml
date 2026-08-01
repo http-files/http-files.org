@@ -157,6 +157,7 @@ clients:
     platform: CLI
     language: C#
     repo: https://github.com/api1st/httprun
+    docs: https://github.com/api1st/httprun#readme
     description: >
       CLI targeting VS Code REST Client compatibility. Supports batch execution
       of .http files with configurable timeouts and success codes.
