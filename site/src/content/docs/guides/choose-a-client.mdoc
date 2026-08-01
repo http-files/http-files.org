@@ -45,24 +45,15 @@ Built into Visual Studio 2022 since v17.6. Supports the JetBrains environment fo
 
 ### CI/CD pipelines
 
-{% client-grid %}
-{% client-card id="ijhttp" /%}
-{% client-card id="httpyac-cli" /%}
-{% client-card id="resterm" /%}
-{% client-card id="kulala-cli" /%}
-{% /client-grid %}
+Run `.http` files headlessly with any of the [CLI tools](/clients/cli/) — JetBrains' `ijhttp`, the httpyac CLI, and several others.
 
 ### Building tools that parse .http files
 
-{% client-grid %}
-{% client-card id="http-request-in-editor" /%}
-{% client-card id="http-rest-file" /%}
-{% client-card id="tree-sitter-http" /%}
-{% /client-grid %}
+Start from one of the [parser libraries](/clients/parsers/) rather than writing a grammar from scratch.
 
 ## Compatibility at a glance
 
-If you want maximum portability, stick to the universal core syntax and use `http-client.env.json` for environments. See the [portability guide](/compare/portability/) for specific recommendations.
+If you want maximum portability, stick to the universal core syntax and use `http-client.env.json` for environments. See [Writing Portable Files](/guides/portability/) for specific recommendations.
 
 If you want maximum features, **httpyac** supports the broadest feature set: both JetBrains and REST Client syntax, plus its own scripting, assertions, and protocol extensions.
 

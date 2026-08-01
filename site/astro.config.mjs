@@ -6,6 +6,13 @@ import markdoc from '@astrojs/markdoc';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://http-files.org',
+	redirects: {
+		'/spec/file-includes/': '/spec/file-operations/',
+		'/spec/imports/': '/spec/file-operations/',
+		'/spec/response-saving/': '/spec/file-operations/',
+		'/spec/multipart/': '/spec/file-operations/',
+		'/compare/portability/': '/guides/portability/',
+	},
 	integrations: [
 		markdoc(),
 		starlight({
@@ -17,7 +24,7 @@ export default defineConfig({
 				replacesTitle: false,
 			},
 			social: [
-				{ icon: 'github', label: 'GitHub', href: 'https://github.com/x-amz/http-files.org' },
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com/http-files/http-files.org' },
 			],
 			customCss: ['./src/styles/custom.css'],
 			head: [
@@ -57,30 +64,53 @@ export default defineConfig({
 						{ label: 'What are .http files?', slug: 'guides/introduction' },
 						{ label: 'Your First .http File', slug: 'guides/quickstart' },
 						{ label: 'Choose a Client', slug: 'guides/choose-a-client' },
+						{ label: 'Writing Portable Files', slug: 'guides/portability' },
 					],
 				},
 				{
 					label: 'Specification',
 					items: [
-						{ label: 'File Basics', slug: 'spec/basics' },
-						{ label: 'Requests', slug: 'spec/requests' },
-						{ label: 'Separators & Comments', slug: 'spec/separators' },
-						{ label: 'Variables', slug: 'spec/variables' },
-						{ label: 'Environments', slug: 'spec/environments' },
-						{ label: 'Dynamic Variables', slug: 'spec/dynamic-variables' },
-						{ label: 'Metadata & Annotations', slug: 'spec/metadata' },
-						{ label: 'Authentication', slug: 'spec/auth' },
-						{ label: 'File Includes', slug: 'spec/file-includes' },
-						{ label: 'Multipart & Uploads', slug: 'spec/multipart' },
-						{ label: 'GraphQL', slug: 'spec/graphql' },
-						{ label: 'Response Handlers', slug: 'spec/response-handlers' },
-						{ label: 'Pre-Request Scripts', slug: 'spec/pre-request-scripts' },
-						{ label: 'Response Saving', slug: 'spec/response-saving' },
-						{ label: 'Cookies', slug: 'spec/cookies' },
-						{ label: 'SSL & Certificates', slug: 'spec/ssl' },
-						{ label: 'Proxy', slug: 'spec/proxy' },
-						{ label: 'Protocols', slug: 'spec/protocols' },
-						{ label: 'Imports & Cross-File', slug: 'spec/imports' },
+						{
+							label: 'Fundamentals',
+							items: [
+								{ label: 'File Basics', slug: 'spec/basics' },
+								{ label: 'Requests', slug: 'spec/requests' },
+								{ label: 'Separators & Comments', slug: 'spec/separators' },
+							],
+						},
+						{
+							label: 'Variables',
+							items: [
+								{ label: 'Variables', slug: 'spec/variables' },
+								{ label: 'Environments', slug: 'spec/environments' },
+								{ label: 'Dynamic Variables', slug: 'spec/dynamic-variables' },
+							],
+						},
+						{
+							label: 'Request Features',
+							items: [
+								{ label: 'Metadata & Annotations', slug: 'spec/metadata' },
+								{ label: 'Authentication', slug: 'spec/auth' },
+								{ label: 'File Operations', slug: 'spec/file-operations' },
+								{ label: 'GraphQL', slug: 'spec/graphql' },
+							],
+						},
+						{
+							label: 'Scripting',
+							items: [
+								{ label: 'Response Handlers', slug: 'spec/response-handlers' },
+								{ label: 'Pre-Request Scripts', slug: 'spec/pre-request-scripts' },
+							],
+						},
+						{
+							label: 'Transport',
+							items: [
+								{ label: 'Cookies', slug: 'spec/cookies' },
+								{ label: 'SSL & Certificates', slug: 'spec/ssl' },
+								{ label: 'Proxy', slug: 'spec/proxy' },
+								{ label: 'Protocols', slug: 'spec/protocols' },
+							],
+						},
 						{ label: 'cURL Integration', slug: 'spec/curl' },
 					],
 				},
@@ -97,13 +127,20 @@ export default defineConfig({
 				{
 					label: 'Compatibility',
 					items: [
-						{ label: 'Comparison Overview', slug: 'compare/overview' },
+						{ label: 'Overview', slug: 'compare/overview' },
 						{ label: 'Core Syntax', slug: 'compare/core' },
 						{ label: 'Variables & Environments', slug: 'compare/variables' },
 						{ label: 'Scripting & Testing', slug: 'compare/scripting' },
 						{ label: 'Protocols & Extensions', slug: 'compare/protocols' },
 						{ label: 'Auth & Security', slug: 'compare/auth' },
-						{ label: 'Portability Guide', slug: 'compare/portability' },
+						{ label: 'File Operations', slug: 'compare/file-operations' },
+						{ label: 'cURL', slug: 'compare/curl' },
+					],
+				},
+				{
+					label: 'Standardization',
+					items: [
+						{ label: 'Process', slug: 'standardization/process' },
 					],
 				},
 			],

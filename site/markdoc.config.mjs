@@ -65,13 +65,13 @@ export default defineMarkdocConfig({
 			},
 		},
 
-		// Spec section cross-reference
-		// Usage: {% spec-ref section="4" /%}
+		// Spec page cross-reference
+		// Usage: {% spec-ref page="variables" /%}
 		'spec-ref': {
 			render: component('./src/components/SpecRef.astro'),
 			selfClosing: true,
 			attributes: {
-				section: { type: String, required: true },
+				page: { type: String, required: true },
 			},
 		},
 

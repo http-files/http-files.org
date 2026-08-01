@@ -1,0 +1,31 @@
+---
+title: Standardization Process
+description: How the .http format becomes a versioned, implementation-backed specification — and how client maintainers take ownership of it.
+---
+
+The `.http` format has no RFC. It has something arguably better: more than a dozen independent implementations that mostly agree. This page describes how that agreement becomes a specification.
+
+## The approach: document reality, then stamp it
+
+Standards efforts fail when they prescribe behavior no one has implemented. This project works in the opposite direction:
+
+1. **Document what exists.** The [client registry](/clients/overview/) and [compatibility tables](/compare/overview/) record what each implementation actually does — maintained as open data, correctable by anyone, owned by the maintainers of each client.
+2. **Stamp the core.** The subset of syntax that works identically across implementations becomes the versioned **core profile** — core v1. A file written inside the core profile runs in every compliant client.
+3. **Badge compliance.** Clients that implement a profile version can display its compliance badge, verified against the registry.
+4. **Converge the extensions.** Beyond the core, clients diverge — scripting, protocols, imports. Each divergence is documented here side by side. An extension becomes part of the standard when a super-majority of implementations already share compatible syntax, or when their maintainers agree to converge. New agreement, new version, new badge.
+
+## Who decides
+
+Client maintainers do. Maintainers of tracked implementations can become **maintainer-owners**: final authority over their client's data on this site, an equal vote on what enters the specification, and merge rights on the repository. The full rules — voting thresholds, the evidence rule, versioning — are in [GOVERNANCE.md](https://github.com/http-files/http-files.org/blob/main/GOVERNANCE.md).
+
+The spirit of the rules: **specification follows implementation.** Nothing enters the standard by argument alone — it enters because the implementations already agree, or their maintainers decide to agree.
+
+## Why participate
+
+If you maintain a `.http` client, this site is infrastructure you currently rebuild alone: every client project documents the format from scratch, and none of those documents agree on where the format ends and the client's extensions begin. A shared specification means your docs can cover *your client*, and link here for *the format*. The compatibility data is [CC0](https://github.com/http-files/http-files.org/blob/main/LICENSE.md) — consume it programmatically, render your own tables, no attribution required.
+
+## Current status
+
+**Documenting reality and seating maintainer-owners.** The registry and compatibility tables cover the major implementations; corrections and additions are open to all. The core v1 draft profile will be derived from the features currently marked universal and published here for review.
+
+To take part: [correct your client's data](https://github.com/http-files/http-files.org/blob/main/CONTRIBUTING.md), or [open an issue](https://github.com/http-files/http-files.org/issues) to become a maintainer-owner.

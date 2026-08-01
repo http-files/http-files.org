@@ -26,10 +26,13 @@ Explore feature-by-feature compatibility in each area:
 - [Scripting & Testing](/compare/scripting/) — response handlers, pre-request scripts, assertions
 - [Protocols & Extensions](/compare/protocols/) — GraphQL, WebSocket, gRPC, SSE, MQTT, AMQP
 - [Auth & Security](/compare/auth/) — authentication helpers, SSL, cookies
-- [Portability Guide](/compare/portability/) — how to write .http files that work everywhere
+- [File Operations](/compare/file-operations/) — file includes, imports, response saving, multipart
+- [cURL](/compare/curl/) — cURL import/export, Postman import, code generation
+
+To stay inside the portable subset when writing files, see [Writing Portable Files](/guides/portability/).
 
 ## About this comparison
 
-This compatibility reference is maintained collaboratively. The data lives in structured YAML files that anyone can update via pull request.
+This compatibility reference is maintained collaboratively. The data lives in structured YAML files that anyone can update via pull request. It is also the evidence base for the [standardization process](/standardization/process/): features enter the versioned core profile when the implementations already agree.
 
 This is **not** a ranking. Every implementation makes different tradeoffs — broad IDE integration, maximum features, cross-client compatibility, or simplicity. The goal is to help you understand what your client supports and write portable `.http` files when that matters.

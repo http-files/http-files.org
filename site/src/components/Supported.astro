@@ -21,8 +21,8 @@ const clientsData = yaml.load(fs.readFileSync(clientsPath, 'utf8')) as any;
 <span class="supported-badges">
 	{clientIds.map(id => {
 		const client = clientsData.clients[id];
-		const name = client?.shortName || id;
-		return <span class="supported-badge">{name}</span>;
+		if (!client) throw new Error(`Unknown client in supported badge: ${id}`);
+		return <span class="supported-badge">{client.shortName}</span>;
 	})}
 </span>
 

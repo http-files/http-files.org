@@ -1,45 +1,39 @@
 ---
 /**
- * Cross-reference to a spec section.
- * Usage in Markdoc: {% spec-ref section="4" /%}
+ * Cross-reference link to a spec page.
+ * Usage in Markdoc: {% spec-ref page="variables" /%}
  */
 interface Props {
-	section: string;
+	page: string;
 }
 
-const { section } = Astro.props;
+const { page } = Astro.props;
 
-const sectionMap: Record<string, { title: string; slug: string }> = {
-	'1': { title: 'File Basics', slug: '/spec/basics/' },
-	'2': { title: 'Requests', slug: '/spec/requests/' },
-	'3': { title: 'Separators & Comments', slug: '/spec/separators/' },
-	'4': { title: 'Variables', slug: '/spec/variables/' },
-	'5': { title: 'Environments', slug: '/spec/environments/' },
-	'6': { title: 'Dynamic Variables', slug: '/spec/dynamic-variables/' },
-	'7': { title: 'Metadata & Annotations', slug: '/spec/metadata/' },
-	'8': { title: 'Authentication', slug: '/spec/auth/' },
-	'9': { title: 'File Includes', slug: '/spec/file-includes/' },
-	'10': { title: 'Multipart & Uploads', slug: '/spec/multipart/' },
-	'11': { title: 'GraphQL', slug: '/spec/graphql/' },
-	'12': { title: 'Response Handlers', slug: '/spec/response-handlers/' },
-	'13': { title: 'Pre-Request Scripts', slug: '/spec/pre-request-scripts/' },
-	'14': { title: 'Response Saving', slug: '/spec/response-saving/' },
-	'15': { title: 'Cookies', slug: '/spec/cookies/' },
-	'16': { title: 'SSL & Certificates', slug: '/spec/ssl/' },
-	'17': { title: 'Proxy', slug: '/spec/proxy/' },
-	'18': { title: 'Protocols', slug: '/spec/protocols/' },
-	'19': { title: 'Imports & Cross-File', slug: '/spec/imports/' },
-	'20': { title: 'cURL Integration', slug: '/spec/curl/' },
+const pageMap: Record<string, { title: string; slug: string }> = {
+	'basics': { title: 'File Basics', slug: '/spec/basics/' },
+	'requests': { title: 'Requests', slug: '/spec/requests/' },
+	'separators': { title: 'Separators & Comments', slug: '/spec/separators/' },
+	'variables': { title: 'Variables', slug: '/spec/variables/' },
+	'environments': { title: 'Environments', slug: '/spec/environments/' },
+	'dynamic-variables': { title: 'Dynamic Variables', slug: '/spec/dynamic-variables/' },
+	'metadata': { title: 'Metadata & Annotations', slug: '/spec/metadata/' },
+	'auth': { title: 'Authentication', slug: '/spec/auth/' },
+	'file-operations': { title: 'File Operations', slug: '/spec/file-operations/' },
+	'graphql': { title: 'GraphQL', slug: '/spec/graphql/' },
+	'response-handlers': { title: 'Response Handlers', slug: '/spec/response-handlers/' },
+	'pre-request-scripts': { title: 'Pre-Request Scripts', slug: '/spec/pre-request-scripts/' },
+	'cookies': { title: 'Cookies', slug: '/spec/cookies/' },
+	'ssl': { title: 'SSL & Certificates', slug: '/spec/ssl/' },
+	'proxy': { title: 'Proxy', slug: '/spec/proxy/' },
+	'protocols': { title: 'Protocols', slug: '/spec/protocols/' },
+	'curl': { title: 'cURL Integration', slug: '/spec/curl/' },
 };
 
-const ref = sectionMap[section];
+const ref = pageMap[page];
+if (!ref) throw new Error(`Unknown spec page: ${page}`);
 ---
 
-{ref ? (
-	<a href={ref.slug} class="spec-ref">Section {section}: {ref.title}</a>
-) : (
-	<span class="spec-ref-unknown">Section {section}</span>
-)}
+<a href={ref.slug} class="spec-ref">{ref.title}</a>
 
 <style>
 	.spec-ref {

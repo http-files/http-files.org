@@ -1,5 +1,5 @@
 ---
-title: Portability Guide
+title: Writing Portable Files
 description: How to write .http files that work across all clients — and when to target a specific one.
 ---
 
@@ -8,32 +8,30 @@ description: How to write .http files that work across all clients — and when 
 For maximum cross-tool compatibility, stick to these features:
 
 ```http
-### Request name as comment
-# Variables
 @host = api.example.com
 @token = my-auth-token
 
-### GET request
-GET https://api.example.com/api/users
+### Get users
+GET https://{{host}}/api/users
 Accept: application/json
-Authorization: Bearer token-value
+Authorization: Bearer {{token}}
 
-### POST with JSON body
-POST https://api.example.com/api/users
+### Create user
+POST https://{{host}}/api/users
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "email": "john@example.com"
+  "name": "Jane Doe",
+  "email": "jane@example.com"
 }
 ```
 
 Specifically:
 - Standard HTTP methods (`GET`, `POST`, `PUT`, `DELETE`, `PATCH`, `HEAD`, `OPTIONS`)
-- `###` separators (with no text after them for full portability)
+- `###` separators
 - `#` or `//` comments
 - `@var = value` variable definitions
-- Variable substitution with double curly braces
+- `{{variable}}` substitution
 - `< filepath` file includes (except VS 2022)
 
 ## Environment portability
@@ -77,6 +75,8 @@ Some features are only available in specific clients. When you use them, documen
 | Code generation | VS Code REST Client |
 | CI/CD | ijhttp (JetBrains CLI) or httpyac CLI |
 
+The [Compatibility section](/compare/overview/) has the full per-feature tables behind these recommendations.
+
 ## httpyac as a compatibility bridge
 
 httpyac supports both JetBrains and VS Code REST Client syntax while adding its own extensions. If your team uses mixed editors, httpyac-compatible `.http` files are the closest thing to a universal format.
@@ -85,4 +85,4 @@ httpyac supports both JetBrains and VS Code REST Client syntax while adding its 
 
 The `.http` format lacks a formal standard. This site documents what exists across all implementations and highlights where they diverge. The long-term goal is to help the community converge on a shared specification that preserves the format's simplicity while reducing unnecessary incompatibilities.
 
-If you maintain an `.http` file client and want to contribute to this effort, the [compatibility data](https://github.com/x-amz/http-files.org) is open for pull requests.
+If you maintain an `.http` file client and want to contribute to this effort, see the [standardization process](/standardization/process/) — the [compatibility data](https://github.com/http-files/http-files.org) is open for pull requests.

@@ -1,0 +1,14 @@
+---
+title: File Operations
+description: Cross-client comparison of file includes, imports, response saving, and multipart support.
+---
+
+Reading request bodies from files, cross-file imports, response saving, and multipart uploads vary widely between clients.
+
+{% support-table category="file-operations" /%}
+
+{% interop level="widespread" %}
+Raw file includes (`< filepath`) and multipart form data work everywhere except Visual Studio 2022. Everything beyond that — variable substitution in included files, cross-file imports, `run`, response saving — is client-specific territory.
+{% /interop %}
+
+Syntax and details: [File Operations](/spec/file-operations/) in the specification.

@@ -1,5 +1,5 @@
 ---
-title: Auth & Security Comparison
+title: Auth & Security
 description: Authentication helpers, SSL configuration, and security features across clients.
 ---
 
@@ -25,13 +25,7 @@ description: Authentication helpers, SSL configuration, and security features ac
 
 ## SSL client certificates
 
-Every client that supports SSL certificates uses a different configuration format:
-
-- **VS Code REST Client**: `settings.json` under `rest-client.certificates`
-- **JetBrains**: `http-client.private.env.json` under `SSLConfiguration`
-- **httpyac**: `httpyac.config.js` under `clientCertificates`
-
-See {% spec-ref section="16" /%} for full details.
+Every client that supports SSL certificates uses a different configuration format — see {% spec-ref page="ssl" /%} for each client's mechanism.
 
 ## Cookie handling
 

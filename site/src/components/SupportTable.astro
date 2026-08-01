@@ -22,9 +22,16 @@ const clientsData = yaml.load(fs.readFileSync(clientsPath, 'utf8')) as any;
 const cat = featuresData.categories[category];
 if (!cat) throw new Error(`Unknown feature category: ${category}`);
 
-// The five primary clients for comparison
-const primaryClients = ['vscode', 'jetbrains', 'httpyac', 'vs2022', 'kulala'];
-const clientNames = primaryClients.map(id => clientsData.clients[id]?.shortName || id);
+// Table columns come from the category's own clients list in features.yaml
+const tableClients: string[] = cat.clients;
+if (!Array.isArray(tableClients) || tableClients.length === 0) {
+	throw new Error(`Category "${category}" has no clients list in features.yaml`);
+}
+const clientNames = tableClients.map(id => {
+	const client = clientsData.clients[id];
+	if (!client) throw new Error(`Category "${category}" lists unknown client: ${id}`);
+	return client.shortName;
+});
 
 function supportIcon(value: any): string {
 	if (value === true) return '✓';
@@ -56,10 +63,10 @@ function supportClass(value: any): string {
 						<span>{feature.name}</span>
 						{feature.notes && <span class="feature-note">{feature.notes}</span>}
 					</td>
-					{primaryClients.map(clientId => {
+					{tableClients.map(clientId => {
 						const val = feature.support?.[clientId];
 						return (
-							<td class={`support-cell ${supportClass(val)}`} title={`${clientsData.clients[clientId]?.shortName}: ${val}`}>
+							<td class={`support-cell ${supportClass(val)}`} title={`${clientsData.clients[clientId].shortName}: ${val ?? 'unknown'}`}>
 								<span class="support-icon">{supportIcon(val)}</span>
 							</td>
 						);
@@ -157,5 +164,10 @@ function supportClass(value: any): string {
 
 	.support-cell.partial .support-icon {
 		color: var(--neon-yellow, #ffe600);
+	}
+
+	.support-cell.unknown .support-icon {
+		color: var(--sl-color-gray-4);
+		opacity: 0.6;
 	}
 </style>

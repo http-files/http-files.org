@@ -16,6 +16,8 @@ Everything on the site that describes a client — cards, comparison tables, sup
 
 Step-by-step recipes — updating an entry, adding a new client, correcting feature data, editing pages — are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
+Maintainers who want a say in the specification itself — what enters the versioned core profile, which extensions standardize — should read [GOVERNANCE.md](GOVERNANCE.md) and the [standardization process](https://http-files.org/standardization/process/).
+
 ## Repository map
 
 Source files — everything contributors edit — live under `site/`:
@@ -56,3 +58,7 @@ npm install
 npm run dev        # dev server with hot reload
 npm run build      # exactly what CI runs
 ```
+
+## License
+
+Three-way split, detailed in [LICENSE.md](LICENSE.md): specification prose is **CC BY 4.0**, compatibility data is **CC0** (public domain — consume the YAML freely), and site code is **MIT**.

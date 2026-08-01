@@ -49,7 +49,7 @@ JetBrains uses a standalone JSON file named `http-client.env.json` (intended for
 }
 ```
 
-Private file values override public file values for the same variable names. SSL configuration is also embedded in the private env file (see {% spec-ref section="16" /%}).
+Private file values override public file values for the same variable names. SSL configuration is also embedded in the private env file (see {% spec-ref page="ssl" /%}).
 
 JetBrains supports JSONPath-based nested variable access since 2024.2.
 
@@ -89,6 +89,6 @@ Supported providers: ASP.NET Core User Secrets, Azure Key Vault, and DPAPI encry
 
 kulala.nvim supports both `http-client.env.json` (JetBrains-style) and `.env` files, aiming for full IntelliJ compatibility.
 
-## Comparison
+## Client support
 
-{% support-table category="variables" /%}
+Per-client support for environment features: [Variables & Environments comparison](/compare/variables/).

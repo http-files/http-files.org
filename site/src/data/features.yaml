@@ -1,6 +1,7 @@
 # Feature compatibility data
 # This is the DSL that contributors edit to update comparison tables.
 # Each category maps to a comparison page; each feature tracks support per client.
+# License: CC0 1.0 public domain dedication (see /LICENSE.md).
 #
 # Support values:
 #   true     — fully supported
@@ -9,14 +10,16 @@
 # When syntax differs between clients, use true/partial plus a notes: line,
 # and consider adding a variant to syntax-examples.yaml.
 #
-# Comparison tables render exactly these five primary clients as columns
-# (hardcoded in SupportTable.astro); other clients.yaml entries are not shown:
-#   vscode, jetbrains, httpyac, vs2022, kulala
+# Each category lists its table columns in `clients:`. To add your client's
+# column to a category: add its id (from clients.yaml) to that category's
+# clients list, then add a value for every feature in the category.
+# `npm run validate` (run on every PR) enforces both.
 
 categories:
   core:
     title: Core Syntax
     description: Fundamental request syntax supported by all implementations.
+    clients: [vscode, jetbrains, httpyac, vs2022, kulala]
     features:
       - id: request-line
         name: "Request line (METHOD URL [HTTP-version])"
@@ -99,6 +102,7 @@ categories:
   variables:
     title: Variables & Environments
     description: Variable definition, substitution, scoping, and environment configuration.
+    clients: [vscode, jetbrains, httpyac, vs2022, kulala]
     features:
       - id: inline-variables
         name: "Inline variable definition (@var = value)"
@@ -164,6 +168,7 @@ categories:
   dynamic-variables:
     title: Dynamic Variables
     description: Built-in variables that generate values at request time.
+    clients: [vscode, jetbrains, httpyac, vs2022, kulala]
     features:
       - id: uuid
         name: "UUID v4"
@@ -210,6 +215,7 @@ categories:
   scripting:
     title: Scripting & Testing
     description: Pre-request scripts, response handlers, and assertion syntax.
+    clients: [vscode, jetbrains, httpyac, vs2022, kulala]
     features:
       - id: response-handler-jetbrains
         name: "Response handler scripts (> {% %})"
@@ -270,6 +276,7 @@ categories:
   file-operations:
     title: File Operations
     description: External file includes, response saving, and cross-file references.
+    clients: [vscode, jetbrains, httpyac, vs2022, kulala]
     features:
       - id: file-include
         name: "Body from external file (< filepath)"
@@ -309,6 +316,7 @@ categories:
   protocols:
     title: Protocols & Extensions
     description: Support for protocols beyond standard HTTP.
+    clients: [vscode, jetbrains, httpyac, vs2022, kulala]
     features:
       - id: graphql-header
         name: "GraphQL via X-REQUEST-TYPE header"
@@ -350,6 +358,7 @@ categories:
   auth:
     title: Authentication & Security
     description: Built-in authentication helpers and security configuration.
+    clients: [vscode, jetbrains, httpyac, vs2022, kulala]
     features:
       - id: basic-auth
         name: "Basic authentication (auto Base64 encoding)"
@@ -397,6 +406,7 @@ categories:
   curl:
     title: cURL & Import/Export
     description: cURL compatibility and collection import capabilities.
+    clients: [vscode, jetbrains, httpyac, vs2022, kulala]
     features:
       - id: curl-import
         name: "Import/parse cURL commands"

@@ -1,5 +1,5 @@
 ---
-title: Scripting & Testing Comparison
+title: Scripting & Testing
 description: Response handlers, pre-request scripts, assertions, and test APIs across clients.
 ---
 
@@ -27,14 +27,8 @@ httpyac supports JetBrains scripts for compatibility but adds:
 - **`??` assertion syntax** for concise, readable tests
 - **Event hooks** for request, streaming, response, and after events
 
-```http
-GET https://api.example.com/users
-
-?? status == 200
-?? header content-type includes json
-?? duration < 500
-```
-
 ## kulala.nvim: Lua scripting
 
 kulala.nvim uniquely supports Lua alongside JavaScript in response handler scripts.
+
+Syntax details: {% spec-ref page="response-handlers" /%}, {% spec-ref page="pre-request-scripts" /%}.

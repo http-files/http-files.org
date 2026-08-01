@@ -1,0 +1,130 @@
+---
+title: File Operations
+description: Reading request bodies from files, cross-file imports, saving responses, and multipart uploads.
+---
+
+## Request body from a file
+
+The `<` operator includes the contents of an external file as the request body:
+
+```http
+POST https://api.example.com/data
+Content-Type: application/json
+
+< ./payload.json
+```
+
+{% supported clients="vscode,jetbrains,httpyac,kulala" /%}
+
+File paths can be absolute or relative to the `.http` file's location (or workspace root in VS Code). Visual Studio 2022 does not support file includes.
+
+### Variable substitution in included files
+
+VS Code REST Client and httpyac use `<@` to indicate that variables within the included file should be resolved:
+
+```http
+POST https://api.example.com/data
+Content-Type: application/json
+
+<@ ./template.json
+```
+
+JetBrains resolves variables in included files by default. httpyac provides a `# @injectVariables` metadata tag to control this behavior for JetBrains compatibility.
+
+An encoding can be specified in VS Code REST Client: `<@latin1 ./file.xml`
+
+## Multipart & uploads
+
+All major implementations except Visual Studio 2022 support multipart form data using standard MIME boundary syntax:
+
+```http
+POST https://api.example.com/upload
+Content-Type: multipart/form-data; boundary=----FormBoundary
+
+------FormBoundary
+Content-Disposition: form-data; name="field1"
+
+value1
+------FormBoundary
+Content-Disposition: form-data; name="file"; filename="document.pdf"
+Content-Type: application/pdf
+
+< ./document.pdf
+------FormBoundary--
+```
+
+{% supported clients="vscode,jetbrains,httpyac,kulala" /%}
+
+The `< filepath` within a multipart boundary references a binary file. The `filename` parameter in `Content-Disposition` determines whether the part is sent as a file upload or as form text.
+
+JetBrains provides a live template shortcut `mptr` to quickly scaffold multipart requests.
+
+## Imports & cross-file execution
+
+### JetBrains: import and run
+
+```http
+import ./auth-requests.http
+
+run ./auth-requests.http#loginRequest
+```
+
+`import` makes requests from another file available. `run` executes a specific named request or all requests in a file. Variables can be overridden:
+
+```http
+run ./file.http#request (@var=value)
+```
+
+### httpyac: @import and @ref
+
+```http
+# @import ./shared.http
+# @ref loginRequest
+
+GET https://api.example.com/protected
+Authorization: Bearer {{loginRequest.token}}
+```
+
+`# @import` loads variables and named requests from another file. `# @ref` declares a dependency — the referenced request is executed if needed.
+
+### Other clients
+
+kulala.nvim supports the JetBrains-compatible `import` and `run` syntax. VS Code REST Client and Visual Studio 2022 do not support cross-file imports or execution.
+
+## Saving responses
+
+### Saving with `>>` and `>>!`
+
+JetBrains introduced the `>>` operator for saving response bodies to files:
+
+```http
+GET https://api.example.com/data
+
+>> ./responses/data.json
+```
+
+`>>` creates a new file, appending a numeric suffix (e.g., `-1`, `-2`) if the file already exists. `>>!` overwrites the file if it exists.
+
+{% supported clients="jetbrains,httpyac,kulala" /%}
+
+The `>>` syntax can be combined with response handler scripts. Variables can be used in paths.
+
+VS Code REST Client provides UI-based save buttons instead of in-file syntax.
+
+### Comparing with `<>`
+
+{% supported clients="jetbrains" /%}
+
+JetBrains supports a `<>` response reference for comparing the current response against a previously saved response file:
+
+```http
+GET https://api.example.com/data
+
+<> ./expected-response.json
+```
+
+This is unique to JetBrains.
+
+## Client support
+
+Per-client support for every file operation: [File Operations comparison](/compare/file-operations/).

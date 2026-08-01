@@ -2,6 +2,8 @@
 
 http-files.org is a neutral community reference for the `.http` file format. Every implementation is treated equally — entries describe what a tool does, without ranking or marketing. If you maintain a client, you are the authority on your own entry; corrections and updates are welcome.
 
+Maintainers who want a role in the specification itself — voting on what enters the versioned core profile — should read [GOVERNANCE.md](GOVERNANCE.md) and the [standardization process](https://http-files.org/standardization/process/).
+
 ## The one rule: edit source, never output
 
 The repository separates **source** (what you edit) from **generated** (what the build produces):
@@ -50,7 +52,7 @@ Comparison tables render from [`site/src/data/features.yaml`](site/src/data/feat
 
 Support values are `true`, `false`, or `partial`. When clients support the same feature with different syntax, use `true` or `partial` plus a `notes:` line, and consider adding a syntax example (below).
 
-The tables track the five primary clients — `vscode`, `jetbrains`, `httpyac`, `vs2022`, `kulala` — and render exactly those five columns. Other registered clients appear on the client pages but not as table columns.
+Each category declares its table columns in a `clients:` list. **To add your client's column** to a category: add its id (from `clients.yaml`) to that category's `clients:` list, then add a value for every feature in the category — the validator enforces completeness, so no client ever shows an ambiguous blank. Columns are per-category: add your client where it has behavior to report.
 
 ### Add a new client
 
@@ -60,8 +62,7 @@ The tables track the five primary clients — `vscode`, `jetbrains`, `httpyac`, 
    - the matching category page — `clients/ide.mdoc`, `clients/cli.mdoc`, `clients/neovim.mdoc`, or `clients/parsers.mdoc` — with a sentence or two of context.
 3. Update the tool counts on `clients/overview.mdoc`, `compare/overview.mdoc`, and the home page (`index.mdoc`) if your addition changes them.
 4. If your client has unique syntax for a documented feature, add a variant to `syntax-examples.yaml`.
-
-New clients are not added as comparison-table columns — see the note on the five primary clients above.
+5. To appear in the comparison tables, add your client to the relevant categories in `features.yaml` (previous section).
 
 ### Add or edit a syntax example
 
@@ -87,33 +88,29 @@ Pages are Markdoc (`.mdoc`) files under `site/src/content/docs/`. Besides standa
 | `{% client-card id="jetbrains" /%}` | client info card from `clients.yaml` |
 | `{% client-grid %}…{% /client-grid %}` | grid layout — always wrap multiple cards |
 | `{% interop level="universal" %}…{% /interop %}` | interoperability callout (`universal` / `widespread` / `limited` / `unique`) |
-| `{% spec-ref section="4" /%}` | link to a spec section |
+| `{% spec-ref page="variables" /%}` | titled link to a spec page |
 | `{% http title="Example" %}…{% /http %}` | HTTP code block with a title |
 
 **Known limitation:** Markdoc parses `{%` and `{{` even inside fenced code blocks. Code containing JetBrains/httpyac script syntax (`> {% %}`, `{{ }}`) must go in `syntax-examples.yaml` and render via `{% syntax-example %}`. Putting those characters in a fenced code block in a `.mdoc` file breaks the build or renders stray backslashes.
 
-## What the build checks — and what it doesn't
+## What CI checks
 
-CI builds every pull request. The build **fails** on:
+Every pull request runs validation and a full build:
 
-- an unknown `id` in `{% client-card %}`
-- an unknown `category` in `{% support-table %}`
+- **`npm run validate`** cross-checks the YAML files against each other and against every tag in the pages: unknown client ids (including in `{% supported %}` badges), unknown table categories, unknown syntax-example keys, and incomplete or invalid feature-support data all fail with a specific message.
+- **`npm run build`** additionally fails on unknown ids in `{% client-card %}`, `{% support-table %}`, and `{% spec-ref %}`.
 
-The build does **not** catch:
-
-- a typo'd id in `{% supported clients="..." %}` — it renders the raw typo as a badge
-- an unknown `feature` in `{% syntax-example %}` — it renders a "not yet documented" note
-
-Double-check those against `clients.yaml` and `syntax-examples.yaml`, or preview locally.
+If both pass locally, CI will agree.
 
 ## Local preview
 
-Optional — CI builds every PR — but useful for anything beyond a data edit:
+Optional — CI validates and builds every PR — but useful for anything beyond a data edit:
 
 ```sh
 cd site
 npm install
 npm run dev        # dev server with hot reload
+npm run validate   # data + tag cross-checks
 npm run build      # exactly what CI runs
 npm run preview    # serve the built output
 ```
@@ -123,3 +120,13 @@ npm run preview    # serve the built output
 - One client or one topic per PR.
 - Neutral voice: technical, factual, no marketing language, no rankings.
 - If you're correcting data about a client you don't maintain, cite documentation or reproducible behavior in the PR description.
+
+## Licensing
+
+Contributions land under the license of what you touch (see [LICENSE.md](LICENSE.md)):
+
+- Specification prose (`site/src/content/docs/`) — **CC BY 4.0**
+- Compatibility data (`site/src/data/`) — **CC0** public domain dedication
+- Everything else — **MIT**
+
+By opening a PR you agree that your contribution is provided under the matching license and that you have the right to contribute the material.

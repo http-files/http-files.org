@@ -1,6 +1,7 @@
 # Client/implementation registry
 # This is the single source of truth for all .http file implementations.
 # Comparison tables, client cards, and support badges all render from this data.
+# License: CC0 1.0 public domain dedication (see /LICENSE.md).
 
 clients:
   vscode:

@@ -1,5 +1,6 @@
 # Syntax examples for features where clients differ.
 # Referenced by {% syntax-example feature="..." /%}
+# License: CC0 1.0 public domain dedication (see /LICENSE.md).
 
 examples:
   uuid:

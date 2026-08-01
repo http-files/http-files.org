@@ -1,0 +1,14 @@
+---
+title: cURL
+description: Cross-client comparison of cURL import, cURL export, Postman import, and code generation.
+---
+
+Converting between `.http` requests and other formats — pasted cURL commands, cURL export, Postman collections, generated code — is supported unevenly.
+
+{% support-table category="curl" /%}
+
+{% interop level="limited" %}
+cURL import and export are IDE conveniences in VS Code REST Client and JetBrains, not part of the file format itself. A `.http` file never contains cURL syntax — these features convert at the editor boundary.
+{% /interop %}
+
+Syntax and details: [cURL Integration](/spec/curl/) in the specification.

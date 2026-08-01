@@ -53,10 +53,10 @@ Each request is independent and can be executed individually.
 
 The core syntax is simple, but the format supports much more:
 
-- **Variables and environments** for switching between dev/staging/prod ({% spec-ref section="4" /%})
-- **Response chaining** to pass data between requests ({% spec-ref section="4" /%})
-- **Scripting and assertions** for API testing ({% spec-ref section="12" /%})
-- **GraphQL, WebSocket, and gRPC** support in some clients ({% spec-ref section="18" /%})
+- **Variables and environments** for switching between dev/staging/prod ({% spec-ref page="environments" /%})
+- **Response chaining** to pass data between requests ({% spec-ref page="variables" /%})
+- **Scripting and assertions** for API testing ({% spec-ref page="response-handlers" /%})
+- **GraphQL, WebSocket, and gRPC** support in some clients ({% spec-ref page="graphql" /%})
 
 Not all features are supported by all clients. The [compatibility reference](/compare/overview/) tracks exactly what works where.
 
@@ -72,16 +72,4 @@ Not all features are supported by all clients. The [compatibility reference](/co
 
 There is no RFC or formal standard for `.http` files. The format is a de facto standard that emerged from convergent implementation. This site aims to document the complete feature set across all implementations and serve as the neutral reference for the format going forward.
 
-Three layers of compatibility exist:
-
-{% interop level="universal" %}
-**Universal core** — request syntax, `###` separators, `#` and `//` comments, `{{variables}}`, `@var = value` definitions. Works identically everywhere.
-{% /interop %}
-
-{% interop level="widespread" %}
-**Widely supported** — environments, file includes, metadata tags, auth helpers. Shared by most tools, sometimes with syntax variations.
-{% /interop %}
-
-{% interop level="unique" %}
-**Implementation-specific** — scripting, assertions, protocol extensions, import/run. Not portable without targeting a specific client.
-{% /interop %}
+Three layers of compatibility exist — a universal core that works identically everywhere, widely supported features with minor syntax variations, and implementation-specific extensions. The [Compatibility overview](/compare/overview/) maps all three, and [Writing Portable Files](/guides/portability/) shows how to stay inside the portable subset.
