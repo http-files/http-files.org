@@ -6,9 +6,11 @@
 #   true     — fully supported
 #   false    — not supported
 #   partial  — partial or limited support
-#   "syntax" — supported with different syntax (see notes)
+# When syntax differs between clients, use true/partial plus a notes: line,
+# and consider adding a variant to syntax-examples.yaml.
 #
-# The five primary clients tracked in comparison tables:
+# Comparison tables render exactly these five primary clients as columns
+# (hardcoded in SupportTable.astro); other clients.yaml entries are not shown:
 #   vscode, jetbrains, httpyac, vs2022, kulala
 
 categories:
