@@ -119,11 +119,25 @@ clients:
     type: cli
     platform: CLI, TUI, GUI
     language: Rust
-    repo: https://github.com/chelle-helle/httprunner
-    docs: https://github.com/chelle-helle/httprunner#readme
+    repo: https://github.com/christianhelle/httprunner
+    docs: https://christianhelle.com/httprunner
     description: >
       Rust-based CLI/TUI/GUI supporting both JetBrains and REST Client syntax,
       http-client.env.json, and HTML/Markdown report generation.
+
+  resterm:
+    name: Resterm
+    shortName: Resterm
+    author: unkn0wn-root
+    type: cli
+    platform: CLI, TUI
+    language: Go
+    repo: https://github.com/unkn0wn-root/resterm
+    docs: https://github.com/unkn0wn-root/resterm#readme
+    description: >
+      Terminal API client for .http and .rest files with support for HTTP,
+      GraphQL, gRPC, WebSockets, SSE, workflows, SSH tunnels, profiling,
+      OpenAPI, Kubernetes port-forwarding, and headless execution.
 
   kulala-cli:
     name: Kulala CLI
@@ -144,6 +158,7 @@ clients:
     platform: CLI
     language: C#
     repo: https://github.com/api1st/httprun
+    docs: https://github.com/api1st/httprun#readme
     description: >
       CLI targeting VS Code REST Client compatibility. Supports batch execution
       of .http files with configurable timeouts and success codes.
